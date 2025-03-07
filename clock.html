@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real vaqtda soat</title>
+    <style>
+      body {
+        font-family: "Fira Code", "Lucida Console", "Courier New", monospace;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: black;
+        color: lime;
+        letter-spacing: 35px;
+        font-size: 10vh;
+        text-shadow: 0 0 5px #0f0, 0 0 75px #0f0, 0 0 35px #0f0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="clock">00:00:00</div>
+
+    <script>
+      function updateClock() {
+        let now = new Date();
+        let hours = now.getHours().toString().padStart(2, "0");
+        let minutes = now.getMinutes().toString().padStart(2, "0");
+        let seconds = now.getSeconds().toString().padStart(2, "0");
+        document.getElementById(
+          "clock"
+        ).textContent = `${hours}:${minutes}:${seconds}`;
+      }
+
+      setInterval(updateClock, 1000);
+      updateClock(); // Dastlabki vaqtni darhol chiqarish
+    </script>
+  </body>
+</html>
