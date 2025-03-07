@@ -9,19 +9,46 @@
         font-family: "Fira Code", "Lucida Console", "Courier New", monospace;
         font-weight: bold;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 100vh;
         background-color: black;
         color: lime;
         letter-spacing: 35px;
         font-size: 10vh;
-        text-shadow: 0 0 5px #0f0, 0 0 75px #0f0, 0 0 35px #0f0;
+        text-shadow: 0 0 2px #0f0, 0 0 0px #0f0, 0 0 35px #0f0;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+      }
+      button {
+        position: absolute;
+        top: 5px;
+        left: 20px;
+        margin-top: 20px;
+        font-size: 1.5rem;
+        padding: 15px 35px;
+        background: lime;
+        border: 2px solid transparent;
+        color: black;
+        cursor: pointer;
+        font-family: monospace;
+        font-weight: 900;
+        text-shadow: none;
+        border-radius: 10px;
+        transition: 650ms;
+      }
+      button:hover {
+        background: transparent;
+        border-color: lime;
+        color: lime;
+        box-shadow: 0 0 20px 1px lime;
       }
     </style>
   </head>
   <body>
     <div id="clock">00:00:00</div>
+    <button id="fullscreen-btn">To'liq ekran</button>
 
     <script>
       function updateClock() {
@@ -29,13 +56,29 @@
         let hours = now.getHours().toString().padStart(2, "0");
         let minutes = now.getMinutes().toString().padStart(2, "0");
         let seconds = now.getSeconds().toString().padStart(2, "0");
-        document.getElementById(
-          "clock"
-        ).textContent = `${hours}:${minutes}:${seconds}`;
+        document.getElementById("clock").textContent = `${hours}:${minutes}:${seconds}`;
       }
 
       setInterval(updateClock, 1000);
-      updateClock(); // Dastlabki vaqtni darhol chiqarish
+      updateClock();
+
+      const btn = document.getElementById("fullscreen-btn");
+
+      btn.addEventListener("click", () => {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen();
+          btn.textContent = "Ortga Qaytish";
+        } else {
+          document.exitFullscreen();
+          btn.textContent = "To'liq ekran";
+        }
+      });
+
+      document.addEventListener("fullscreenchange", () => {
+        if (!document.fullscreenElement) {
+          btn.textContent = "To'liq ekran";
+        }
+      });
     </script>
   </body>
 </html>
